@@ -26,19 +26,23 @@
                         <td>{{ $info['symbol'] }}</td>
                         <td>{{ $info['name'] }}</td>
                         <td>
-                            @php 
-                                $id = "qtd".$loop->index; 
-                                echo "<input id=".$id." type='number' maxlenght='4'></input>";
-                            @endphp
+                            <input id='{{"qtd".$loop->index}}' type='number' maxlenght='4' onchange='myFunction()'></input>
                         </td>
                         <td>
-                            @php $value = $_GET['qtd'.$loop->index];
-                                $price = $info['quote']['USD']['price'];
-                                $sum = $value * $price;
-                                echo $sum; 
-                            @endphp
+                            <label id='{{"label".$loop->index}}'></label>
                         </td>
                     </tr>
+                    <script>
+                        function myFunction() {
+                            var qtd = document.getElementById({{'qtd'.$loop->index}}).value;
+                            var priceId = document.getElementById({{'label'.$loop->index}});
+                            var valor =  {{ $info['quote']['USD']['price'] }};
+                            
+                            var mult = qtd * valor;
+
+                            priceId.innerHTML(mult);
+                        }
+                    </script>
                     @endforeach
                 </tbody>
             </table>

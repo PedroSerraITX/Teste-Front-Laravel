@@ -1,7 +1,9 @@
 
-verifique se o diretorio que voce esta é /Teste-Intergalaxy/
+Verifique se o diretorio que voce esta é /Teste-Intergalaxy/
 
-use os comandos:
+Inicie o seu servidor Apache e o Mysql.
+
+Use os comandos:
     composer install
 
 
