@@ -15,8 +15,9 @@
                         <th scope="col">ID</th>
                         <th scope="col">Symbol</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Quantity</th>
                         <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Calculated value</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,28 +26,16 @@
                         <td>{{ $info['id'] }}</td>
                         <td>{{ $info['symbol'] }}</td>
                         <td>{{ $info['name'] }}</td>
-                        <td>
-                            <input id='{{"qtd".$loop->index}}' type='number' maxlenght='4' onchange='myFunction()'></input>
-                        </td>
-                        <td>
-                            <label id='{{"label".$loop->index}}'></label>
-                        </td>
+                        <td><label>{{ $info['quote']['USD']['price'] }}</label></td>
+                        <td><input type="number" name="quant[]" class="form-control prc " min="1" max="10" step="1"></td>
+                        <td><input type="text" name="total[]" class="form-control" value="0"></td>
+                        <td><input type="hidden" name="preco[]" value="{{ $info['quote']['USD']['price'] }}" /></td>
                     </tr>
-                    <script>
-                        function myFunction() {
-                            var qtd = document.getElementById({{'qtd'.$loop->index}}).value;
-                            var priceId = document.getElementById({{'label'.$loop->index}});
-                            var valor =  {{ $info['quote']['USD']['price'] }};
-                            
-                            var mult = qtd * valor;
-
-                            priceId.innerHTML(mult);
-                        }
-                    </script>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
 @endsection

@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 
 
 class HomeController extends Controller
-{
+{   
     /**
      * Create a new controller instance.
      *
@@ -27,14 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // OLD
-        // $allcryptos = CoinMarketCapApi::all_cryptos();
-        // return view('home', compact('allcryptos'));
-        
         $url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
         $parameters = [
         'start' => '1',
-        'limit' => '5',
+        'limit' => '5000',
         'convert' => 'USD'
         ];
 
@@ -58,8 +54,6 @@ class HomeController extends Controller
         $body = json_decode($response, true); // print json decoded response
         curl_close($curl); // Close request
 
-
-        
         return view("home", [
             "infos" => $body['data']
         ]);
